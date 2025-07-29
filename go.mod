@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/alicebob/miniredis/v2 v2.35.0
 	github.com/gophero/goal v0.0.0-20250729095439-8a154fbf5bd7
-	github.com/gophero/got v0.0.0-20250729103131-14e190b24dac
+	github.com/gophero/got v0.0.0-20250729104249-78daf419600c
 	github.com/redis/go-redis/v9 v9.11.0
 	github.com/stretchr/testify v1.10.0
 )

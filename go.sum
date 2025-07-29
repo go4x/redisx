@@ -20,6 +20,8 @@ github.com/gophero/goal v0.0.0-20250729095439-8a154fbf5bd7 h1:2+MFBlmbYCTiviEsy9
 github.com/gophero/goal v0.0.0-20250729095439-8a154fbf5bd7/go.mod h1:qu+/iRIYbz35jLcbXYQh8BMcg9COHY9kWnfjg33z/xU=
 github.com/gophero/got v0.0.0-20250729103131-14e190b24dac h1:BOr+S8NG1fKk1SLor/7q3yxTT6IRmLR6ZSkNcK9XEXw=
 github.com/gophero/got v0.0.0-20250729103131-14e190b24dac/go.mod h1:nbrpifyN6eW5h7Dm6sVgqmmzDTn7om3Qv0Pt0cc7n2g=
+github.com/gophero/got v0.0.0-20250729104249-78daf419600c h1:LfC2QE9O4qp/NYEaHW8zkK7IZSSDZHo3zGRNHxvPFQo=
+github.com/gophero/got v0.0.0-20250729104249-78daf419600c/go.mod h1:nbrpifyN6eW5h7Dm6sVgqmmzDTn7om3Qv0Pt0cc7n2g=
 github.com/nxadm/tail v1.4.8 h1:nPr65rt6Y5JFSKQO7qToXr7pePgD6Gwiw05lkbyAQTE=
 github.com/nxadm/tail v1.4.8/go.mod h1:+ncqLTQzXmGhMZNUePPaPqPvBxHAIsmXswZKocGu+AU=
 github.com/onsi/ginkgo v1.16.5 h1:8xi0RTUf59SOSfEtZMvwTvXYMzG4gV23XVHOZiXNtnE=
