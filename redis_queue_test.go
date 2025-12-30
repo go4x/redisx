@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gophero/got/redist"
-	"github.com/gophero/redisx"
+	"github.com/go4x/got/redist"
+	"github.com/go4x/redisx"
 	"github.com/redis/go-redis/v9"
 	"github.com/stretchr/testify/assert"
 )
@@ -21,7 +21,7 @@ func TestMain(m *testing.M) {
 
 func TestNormalQueue(t *testing.T) {
 	var err error
-	rc := redist.NewMiniRedis()
+	rc, _ := redist.NewMiniRedis()
 	q := redisx.NewQueue(rc, "test_normal_queue")
 	err = q.Push("key1", "key2")
 	assert.True(t, q.Len() == 2)
@@ -44,7 +44,7 @@ func TestNormalQueue(t *testing.T) {
 
 func TestUniqueQueue(t *testing.T) {
 	var err error
-	rc := redist.NewMiniRedis()
+	rc, _ := redist.NewMiniRedis()
 	q := redisx.NewUniqueQueue(rc, "test_uniqueue")
 	err = q.Push("key1", "key2")
 	assert.True(t, q.Len() == 2)
@@ -66,7 +66,7 @@ func TestUniqueQueue(t *testing.T) {
 
 func TestUniqueQueue_Push(t *testing.T) {
 	var err error
-	rc := redist.NewMiniRedis()
+	rc, _ := redist.NewMiniRedis()
 	q := redisx.NewUniqueQueue(rc, "test_uniqueue")
 	err = q.Push("key1", "key2")
 	assert.True(t, q.Len() == 2)
@@ -90,7 +90,7 @@ func TestUniqueQueue_Push(t *testing.T) {
 
 func TestUniqueQueue_PopN(t *testing.T) {
 	var err error
-	rc := redist.NewMiniRedis()
+	rc, _ := redist.NewMiniRedis()
 	q := redisx.NewUniqueQueue(rc, "test_uniqueue")
 	err = q.Push("key1", "key2")
 	assert.True(t, q.Len() == 2)
@@ -130,7 +130,7 @@ func (uq *uniqueue) retryPush(ch chan struct{}, vs ...any) error {
 
 func TestUniqueQueue_RetryPush(t *testing.T) {
 	ch := make(chan struct{})
-	rc := redist.NewMiniRedis()
+	rc, _ := redist.NewMiniRedis()
 	q := uniqueue{UniqueQueue: redisx.NewExportUniqueQueue(rc, "test_unique")}
 	err := q.retryPush(ch, "key1", "key2")
 	if err != nil {
@@ -141,7 +141,7 @@ func TestUniqueQueue_RetryPush(t *testing.T) {
 }
 
 func TestBoundedQueue(t *testing.T) {
-	rc := redist.NewMiniRedis()
+	rc, _ := redist.NewMiniRedis()
 	q := redisx.NewBoundedQueue(rc, "test_bounded_queue", 2)
 	err := q.Push("key1", "key2")
 	if err != nil {
@@ -157,7 +157,7 @@ func TestBoundedQueue(t *testing.T) {
 }
 
 func TestBoundedUniqueQueue(t *testing.T) {
-	rc := redist.NewMiniRedis()
+	rc, _ := redist.NewMiniRedis()
 	q := redisx.NewBoundedUniqueQueue(rc, "test_unique_bounded_queue", 2)
 	err := q.Push("key1", "key2")
 	if err != nil {

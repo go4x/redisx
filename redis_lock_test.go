@@ -7,24 +7,25 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gophero/goal/assert"
-	"github.com/gophero/got"
-	"github.com/gophero/got/redist"
-	"github.com/gophero/redisx"
+	"github.com/go4x/goal/assert"
+	"github.com/go4x/got"
+	"github.com/go4x/got/redist"
+	"github.com/go4x/redisx"
 	"github.com/redis/go-redis/v9"
 )
 
 func conn() redis.Cmdable {
-	return redist.NewMiniRedis()
+	rc, _ := redist.NewMiniRedis()
+	return rc
 }
 
-func testConn(tl *got.Logger) {
+func testConn(tl *got.R) {
 	tl.Case("test connect redis")
-	c := redist.NewMiniRedis()
+	c, _ := redist.NewMiniRedis()
 	assert.NoneNil(c)
 }
 
-func testLock(tl *got.Logger) {
+func testLock(tl *got.R) {
 	tl.Case("test reentry lock")
 	var exp uint32 = 2 // 超时时间
 	lock := redisx.NewLock(conn(), "test-key", exp)
@@ -51,7 +52,7 @@ func testLock(tl *got.Logger) {
 	tl.Require(b, "acquire should be success")
 }
 
-func testLock1(tl *got.Logger) {
+func testLock1(tl *got.R) {
 	tl.Case("test reentry lock many times")
 	n := 1000
 	var exp uint32 = 2 // 超时时间
@@ -63,7 +64,7 @@ func testLock1(tl *got.Logger) {
 	}
 }
 
-func testLock2(tl *got.Logger) {
+func testLock2(tl *got.R) {
 	tl.Case("test create many different lock and use them")
 
 	client := conn()
@@ -82,7 +83,7 @@ func testLock2(tl *got.Logger) {
 	}
 }
 
-func testLock3(tl *got.Logger) {
+func testLock3(tl *got.R) {
 	tl.Case("test acquire and release lock")
 	n := 1000
 	var exp uint32 = 2 // 超时时间
@@ -98,8 +99,7 @@ func testLock3(tl *got.Logger) {
 }
 
 func TestRedixLock(t *testing.T) {
-	tl := got.Wrap(t)
-	tl.Case("test acquire lock")
+	tl := got.New(t, "test acquire lock")
 	testConn(tl)
 	testLock(tl)
 	testLock1(tl)
@@ -123,7 +123,7 @@ func TestRedisGet(t *testing.T) {
 }
 
 func TestLockWait(t *testing.T) {
-	client := redist.NewMiniRedis()
+	client, _ := redist.NewMiniRedis()
 	var wg sync.WaitGroup
 	wg.Add(2)
 	start := time.Now().Unix()

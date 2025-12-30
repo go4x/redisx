@@ -7,7 +7,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/gophero/goal/stringx"
+	"github.com/go4x/goal/random"
 	"github.com/redis/go-redis/v9"
 )
 
@@ -46,7 +46,7 @@ func NewLock(store redis.Cmdable, key string, expireSec uint32) *Lock {
 	return &Lock{
 		store:   store,
 		key:     key,
-		id:      stringx.Randn(randomLen),
+		id:      random.Alphanumeric(randomLen),
 		seconds: expireSec,
 	}
 }
